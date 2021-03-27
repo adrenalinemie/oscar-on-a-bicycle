@@ -1,0 +1,34 @@
+{{#if @config.custom.bottomNews}}
+   <div class="bottom-news {{#checkIf @config.custom.layoutMode '==' "flat" }} instagram-box--flat{{/checkIf}} {{#if @pagination}} instagram-box--flat{{/if}}">
+      <div class="wrapper {{#checkIf @config.custom.navbarWidth '!=' "narrow" }} wrapper--full{{/checkIf}}">
+         {{#if @config.custom.bottomNewsLabel}}
+            <p>{{@config.custom.bottomNewsLabel}}</p>
+         {{/if}}
+         {{#if @config.custom.bottomNewsInstagramLabel}}
+            <h3><a href="{{@config.custom.bottomNewsInstagramUrl}}" target="_blank" rel="noreferrer">{{@config.custom.bottomNewsInstagramLabel}}</a></h3>
+         {{/if}}
+         <ul class="bottom-news__wrapper">
+            {{#getPostsByTags 6 @config.custom.bottomNewsTagIndicator ""}}
+               <li>
+                  {{#featuredImage}}
+                     {{#if url}}
+                        <a href="{{../url}}" class="bottom-news__image">
+                           <img
+                              src="{{url}}"
+                              {{#if @config.site.responsiveImages}}                           
+                                 {{responsiveImageAttributes 'featuredImage' srcset.listing sizes.listing}}
+                              {{/if}}
+                              {{ lazyload "lazy" }}
+                              height="{{height}}"
+                              width="{{width}}"
+                              alt="{{alt}}">
+                        </a>     
+                     {{/if}}
+                  {{/featuredImage}}
+                  <h3 class="bottom-news__meta h5">{{title}}</h3>
+               </li>
+            {{/getPostsByTags}}
+         </ul>
+      </div>
+   </div>
+{{/if}}

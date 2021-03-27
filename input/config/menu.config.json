@@ -1,0 +1,41 @@
+[
+    {
+        "name": "Main",
+        "position": "mainMenu",
+        "items": [
+            {
+                "id": 1600879597586,
+                "label": "About us",
+                "title": "",
+                "type": "post",
+                "target": "_self",
+                "rel": "",
+                "link": 2,
+                "cssClass": "",
+                "items": []
+            },
+            {
+                "id": 1600879502242,
+                "label": "Scotland 2020",
+                "title": "",
+                "type": "tag",
+                "target": "_self",
+                "rel": "",
+                "link": 1,
+                "cssClass": "",
+                "items": []
+            },
+            {
+                "id": 1601847237062,
+                "label": "Why we cycle",
+                "title": "",
+                "type": "post",
+                "target": "_self",
+                "rel": "",
+                "link": 7,
+                "cssClass": "",
+                "items": []
+            }
+        ]
+    }
+]

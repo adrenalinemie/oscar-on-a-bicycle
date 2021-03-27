@@ -1,0 +1,83 @@
+{
+    "partials": {
+        
+        "disqus": {
+            "noscript1": "Please enable JavaScript to view the",
+            "noscript2": "comments powered by Disqus."
+        },
+
+        "menu": {
+            "label": "Menu"
+        },
+        
+        "pagination": {
+            "prev": "Previous",
+            "next": "Next"
+        },
+        
+        "shareButtons": {
+            "shareWith": "Share with",
+            "shareWithFacebook": "Facebook",
+            "shareWithTwitter": "Twitter",
+            "shareWithPinterest": "Pinterest",
+            "shareWithMix": "Mix",
+            "shareWithLinkedIn": "LinkedIn",
+            "shareWithBuffer": "Buffer",
+            "shareWithWhatsApp": "WhatsApp"
+        },
+        
+        "newsletter": {
+            "title": "Subscribe",
+            "description": "Get the latest news, updates and more delivered directly to your email inbox"
+        },
+        
+        "footer": {
+            "backToTop": "Back to top"
+        }
+    },
+    
+    "post": {
+        "readMore": "Read more",
+        "featuredPost": "Featured",
+        "created": "By ",
+        "updated": "Updated: ",
+        "authorLabel": "Author: ",
+        "tags": "Tags: ",
+        "relatedPosts": "Similar posts: ",
+        "lastUpdatedDate": "This article was updated on",
+        "comments": "Comments",
+        "previousPost": "Prev: ",
+        "nextPost": "Next: ",
+        "publishedBy": "By "
+    },
+
+    "tag": {
+        "category": "Category: ",
+        "tagsPageTitle": "Collection of all tags",
+		"description": "Collection of all tags",
+		"post": {
+			"1": "Post",
+			"default": "Posts"
+	  }
+    },
+
+    "author": {
+		"visitWebsite": "Visit website"
+    },
+
+    "error": {
+        "404": "Error 404",
+        "message": "The page you were looking for appears to have been moved, deleted or does not exist. You could go back to where you were or head straight to our home page.",
+        "button": "Go Home"
+    },
+    
+    "search": {
+        "pagetitle": "Search",
+        "description": "This page uses Google Custom Search, to configure it read the following article: <a href=\"https://getpublii.com/docs/search-configuration.html\" target=\"_blank\">https://getpublii.com/docs/search-configuration.html</a>",
+        "submit": "Submit",
+        "placeholder": "search...",
+        "title": "Search",
+        "close": "Close",
+        "input": "Search input"
+    }
+}

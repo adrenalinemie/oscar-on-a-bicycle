@@ -1,0 +1,51 @@
+<header class="header
+               {{#checkIf @config.custom.navbarWidth '==' "narrow" }} header--narrow{{/checkIf}} 
+               {{#post}} 
+                 {{#checkIf template '!=' "with-hero"}}
+                 {{#checkIf template '!=' "with-hero-without-title"}} 
+                     header--flat-no-hero 
+                  {{/checkIf}}
+                 {{/checkIf}}                 
+               {{/post}}" id="js-header">
+      <div>
+      <a class="logo" href="{{@website.url}}">
+         {{#if @website.logo}}
+            <img src="{{@website.logo}}" alt="{{@website.name}}">
+         {{else}}
+            {{@website.name}}
+         {{/if}}
+      </a>
+          
+      {{#if menus.mainMenu}}      
+         {{> menu menus.mainMenu}}        
+      {{/if}}
+      
+      {{#if @config.custom.search}}
+         <div class="search">
+            <div class="search__overlay 
+                        {{#checkIf @config.custom.navbarWidth '==' "narrow" }} search__overlay--narrow{{/checkIf}}" 
+                        id="js-search-overlay">
+               <div>
+                  <form action="{{@website.searchUrl}}" class="search__form">
+                     <input
+                        class="search__input"
+                        id="js-search-input"
+                        type="search"
+                        name="{{@config.custom.searchParam}}"
+                        placeholder="{{ translate 'search.placeholder' }}" 
+                        aria-label="{{ translate 'search.input' }}"
+                        autofocus="autofocus"/>
+                  </form>
+                  <button class="search__close" id="js-search-close" aria-label="{{ translate 'search.close' }}">{{ translate 'search.close' }}</button>
+               </div>
+            </div>
+            <button class="search__btn" id="js-search-btn" aria-label="{{ translate 'search.title' }}">
+               <svg class="icon" role="presentation" focusable="false">
+                  <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#search"/>
+               </svg>
+            </button>
+         </div>
+      {{/if}}
+          
+   </div>
+</header>

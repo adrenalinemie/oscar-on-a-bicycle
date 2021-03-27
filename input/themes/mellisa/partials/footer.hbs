@@ -1,0 +1,167 @@
+<footer class="footer 
+               {{#checkIf @config.custom.layoutMode '==' "flat" }} 
+                  {{#checkIf @config.custom.instagram '==' false}} footer--flat{{/checkIf}}
+               {{/checkIf}}">
+   <div class="wrapper">
+      <a class="footer__logo" href="{{@website.url}}">
+         {{#if @website.logo}}
+            <img src="{{@website.logo}}" alt="{{@website.name}}">
+         {{else}}
+            {{@website.name}}
+         {{/if}}
+      </a>
+      {{#if menus.footerMenu}}
+         <ul class="footer__nav">
+            {{> simple-menu menus.footerMenu}}
+         </ul>
+      {{/if}}
+
+      <div class="footer__copy">
+         {{{@config.custom.copyrightText}}}
+      </div>
+      {{#if @config.custom.socialButtons}}
+         <div class="footer__social">
+            {{#if @config.custom.socialFacebook}}
+               <a
+                  href="{{@config.custom.socialFacebook}}"
+                  aria-label="Facebook"
+                  target="_blank">
+                  <svg>
+                     <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#facebook"/>
+                  </svg>
+               </a>
+            {{/if}}
+            {{#if @config.custom.socialTwitter}}
+               <a href="{{@config.custom.socialTwitter}}" aria-label="Twitter" target="_blank">
+                  <svg>
+                     <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#twitter"/>
+                  </svg>
+               </a>
+            {{/if}}           
+            {{#if @config.custom.socialInstagram}}
+               <a
+                  href="{{@config.custom.socialInstagram}}"
+                  aria-label="Instagram"
+                  target="_blank">
+                  <svg>
+                     <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#instagram"/>
+                  </svg>
+               </a>
+            {{/if}}
+            {{#if @config.custom.socialLinkedin}}
+               <a
+                  href="{{@config.custom.socialLinkedin}}"
+                  aria-label="LinkedIn"
+                  target="_blank">
+                  <svg>
+                     <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#linkedin"/>
+                  </svg>
+               </a>
+            {{/if}}
+            {{#if @config.custom.socialVimeo}}
+               <a href="{{@config.custom.socialVimeo}}" aria-label="Vimeo" target="_blank">
+                  <svg>
+                     <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#vimeo"/>
+                  </svg>
+               </a>
+            {{/if}}
+            {{#if @config.custom.socialPinterest}}
+               <a
+                  href="{{@config.custom.socialPinterest}}"
+                  aria-label="Pinterest"
+                  target="_blank">
+                  <svg>
+                     <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#pinterest"/>
+                  </svg>
+               </a>
+            {{/if}}
+            {{#if @config.custom.socialYoutube}}
+               <a href="{{@config.custom.socialYoutube}}" aria-label="Youtube" target="_blank">
+                  <svg>
+                     <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#youtube"/>
+                  </svg>
+               </a>
+            {{/if}}
+         </div>
+      {{/if}}
+   </div>
+   {{#if @config.custom.backToTopButton}}
+       <button class="footer__bttop js-footer__bttop" aria-label="{{ translate 'partials.footer.backToTop' }}"> 
+           <svg>
+               <title>{{ translate 'partials.footer.backToTop' }}</title>
+               <use xlink:href="{{@website.assetsUrl}}/svg/svg-map.svg#toparrow" />
+           </svg>
+       </button>   
+    {{/if}}
+</footer>
+
+{{#if @config.custom.newsletter}}
+       {{> newsletter}}
+{{/if}}
+
+<script>window.publiiThemeMenuConfig={mobileMenuMode:'{{@config.custom.mobilemenu}}',animationSpeed:300,submenuWidth:{{#checkIf @config.custom.submenu '==' "auto" }}'auto'{{else}}{{@config.custom.submenuWidth}}{{/checkIf}},doubleClickTime:500,mobileMenuExpandableSubmenus:{{@config.custom.mobilemenuExpandableSubmenus}},relatedContainerForOverlayMenuSelector:'#js-header',};</script>
+
+<script defer src="{{js "scripts.min.js"}}"></script> 
+
+{{#checkIf @config.custom.hero '==' "slider" }}
+   {{#checkIf @config.custom.frontSource '==' "default" }}                 
+       {{#is "index"}}
+           <script defer src="{{js "tiny-slider.min.js"}}"></script>        
+           <script>
+               window.onload = function() {
+                   var slider = tns({
+                       container: ".hero__slider",                                    
+                       mode: '{{@config.custom.heroSliderMode}}',
+                       axis: '{{@config.custom.heroSliderAxis}}',
+                       items: 1,
+                       loop: {{@config.custom.heroSliderLoop}},
+                       mouseDrag: true,
+                       swipeAngle: 15,
+                       speed: {{@config.custom.heroSliderSpeed}},
+                       controls: false,
+                       controlsPosition: "bottom",
+                       arrowKeys: true,
+                       autoplay: {{@config.custom.heroSliderAutoplay}},
+                       autoplayButtonOutput: false,
+                       autoplayTimeout: {{@config.custom.heroSliderAutoplayTimeout}},
+                       rewind: false
+                   });
+               }
+           </script>
+       {{/is}}
+   {{/checkIf}}
+{{/checkIf}}
+
+{{#if @config.site.mediaLazyLoad}}
+<script>/*<![CDATA[*/var images=document.querySelectorAll("img[loading]");for(var i=0;i<images.length;i++){if(images[i].complete){images[i].classList.add("is-loaded")}else{images[i].addEventListener("load",function(){this.classList.add("is-loaded")},false)}};/*]]>*/</script>
+{{/if}}
+
+{{#if @config.custom.pagePrefetching}}
+   <script defer src="{{js "quicklink.umd.js"}}"></script>
+   <script>window.addEventListener('load', () =>{quicklink();});</script>
+{{/if}}
+
+{{#is "post"}}
+   {{#post}}
+      {{#if hasGallery}}
+          {{> photoswipe}}
+      {{/if}}
+  {{/post}}
+{{/is}}
+{{#checkIf @config.custom.frontSource '==' "post"}}
+   {{#checkIf @config.custom.frontGallery '==' true}}
+      {{#is "index"}}
+          {{> photoswipe}}
+      {{/is}}
+   {{/checkIf}}
+{{/checkIf}}
+
+{{#if @renderer.previewMode}}
+   <script src="{{js "svg-map.js"}}"></script>
+   <script src="{{js "svg-fix.js"}}"></script>
+{{/if}}
+
+{{{@footerCustomCode}}}
+{{{ publiiFooter }}}
+</body>
+</html>

@@ -1,0 +1,236 @@
+{{> head}}
+{{> top}}
+<div class="main {{#checkIf @config.custom.layoutMode '==' "flat" }} main--flat{{/checkIf}}">
+   <div class="wrapper">
+      {{#post}}
+         <article class="page {{#checkIf @config.custom.layoutMode '==' "flat" }} page--flat page--flat-no-hero{{/checkIf}} post">
+            <div class="post__inner">
+
+               <header class="post__header">
+                  <h1 class="post__title">{{title}}</h1>
+                  {{#checkIfAny @config.post.displayAuthor @config.post.displayDate @config.post.displayTags}}
+                     <div class="post__meta">
+                        {{#if @config.post.displayAuthor}}
+                           {{#author}}
+                              <a href="{{url}}" class="post__meta-author invert" title="{{name}}">
+                                 {{#if avatar}}
+                                    <img src="{{avatar}}" {{ lazyload "eager" }} alt="{{name}}">
+                                 {{/if}}
+                                 {{ translate 'post.created' }}
+                                 {{name}}
+                              </a>
+                           {{/author}}
+                        {{/if}}
+                        {{#if @config.post.displayDate}}
+                           <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}" class="page__item-date">
+                              {{#checkIf @config.custom.formatDate '!=' 'custom'}}
+                                 {{date createdAt @config.custom.formatDate}}
+                              {{else}}
+                                 {{date createdAt @config.custom.formatDateCustom}}
+                              {{/checkIf}}
+                           </time>
+                        {{/if}}
+                        {{#if @config.post.displayTags}}
+                           {{#if mainTag}}                    
+                              <a href="{{mainTag.url}}" class="post__meta-category">{{mainTag.name }}</a>
+                           {{/if}}
+                        {{/if}}
+                     </div>
+                  {{/checkIfAny}}
+               </header>
+
+               {{#featuredImage}}
+                  {{#if url}}
+                     <div class="page__item-image{{#if @config.post.featuredImage}} page__item-image--wide {{/if}}">                      
+                        <figure class="page__item-image__wrap">
+                           <img 
+                              src="{{url}}"
+                              {{#if @config.site.responsiveImages}}                           
+                                 {{responsiveImageAttributes 'featuredImage' srcset.post sizes.post}}
+                              {{/if}}
+                              {{ lazyload "eager" }}
+                              height="{{height}}"
+                              width="{{width}}"
+                              alt="{{alt}}">
+                           {{#checkIfAny caption credits}}
+                              <figcaption>
+                                 {{caption}}
+                                 {{credits}}
+                              </figcaption>
+                           {{/checkIfAny}}
+                        </figure>
+                     </div>
+                  {{/if}}
+               {{/featuredImage}}
+
+               <div class="post__entry">
+                  {{{text}}}
+               </div>
+
+               {{#checkIfAny @config.post.displayUpdatedDate @config.post.displayTags @config.post.displayShareButtons @config.post.displayAuthorBio @config.post.displayPostNavigation}}
+                  <footer>
+                     {{#if @config.post.displayUpdatedDate}}
+                        <div class="post__updated">{{ translate 'post.updated' }}
+                           <time datetime="{{date modifiedAt 'YYYY-MM-DDTHH:mm'}}">
+                              {{#checkIf @config.custom.formatDate '!=' 'custom'}}
+                                 {{date modifiedAt @config.custom.formatDate}}
+                              {{else}}
+                                 {{date modifiedAt @config.custom.formatDateCustom}}
+                              {{/checkIf}}
+                           </time>
+                        </div>
+                     {{/if}}
+
+                     {{#if @config.post.displayTags}}
+                        {{#if tags}}
+                           <ul class="post__tag">
+                              {{#each tags}}
+                                 <li>
+                                    <a href="{{url}}" title="{{name}}" class="invert">
+                                       {{name}}
+                                    </a>
+                                 </li>
+                              {{/each}}
+                           </ul>
+                        {{/if}}
+                     {{/if}}
+
+                     {{#if @config.post.displayShareButtons}}
+                        <div class="post__share">
+                           {{> share-buttons}}
+                        </div>
+                     {{/if}}
+
+                     {{#if @config.post.displayAuthorBio}}
+                        {{#author}}
+                           <div class="post__bio">
+                              {{#if avatar}}
+                                 <img src="{{avatar}}" {{ lazyload "lazy" }} alt="{{name}}">
+                              {{/if}}
+                              <div>
+                                 {{#if name}}
+                                    <h3 class="h5">
+                                       <a href="{{url}}" title="{{name}}" class="invert">{{name}}</a>
+                                    </h3>
+                                 {{/if}}
+                                 {{#if description}}
+                                    <p>{{description}}
+                                    </p>
+                                 {{/if}}
+                              </div>
+                           </div>
+                        {{/author}}
+                     {{/if}}
+
+                     {{#if @config.post.displayPostNavigation}}
+                        {{#checkIfAny ../previousPost ../nextPost}}
+                           <nav class="post__nav" id="js-post__nav">
+                              {{#../previousPost}}
+                                 <div class="post__nav__prev">
+                                    <a href="{{url}}" rel="prev" class="post__nav__link">
+                                       {{#featuredImage}}
+                                          {{#if urlXs}}
+                                             <img 
+                                                src="{{urlXs}}"
+                                                {{ lazyload "lazy" }}
+                                                height="{{height}}"
+                                                width="{{width}}"
+                                                alt="{{alt}}">
+                                          {{/if}}
+                                       {{/featuredImage}}
+                                       <div class="post__nav__text">{{ translate 'post.previousPost' }}
+                                          <h5 class="invert">
+                                             {{title}}
+                                          </h5>
+                                       </div>
+                                    </a>
+                                 </div>
+                              {{/../previousPost}}
+                              {{#../nextPost}}
+                                 <div class="post__nav__next">
+                                    <a href="{{url}}" rel="next" class="post__nav__link">
+                                       <div class="post__nav__text">{{ translate 'post.nextPost' }}
+                                          <h5 class="invert">
+                                             {{title}}
+                                          </h5>
+                                       </div>
+                                       {{#featuredImage}}
+                                          {{#if urlXs}}
+                                             <img 
+                                                src="{{urlXs}}"
+                                                {{ lazyload "lazy" }}
+                                                height="{{height}}"
+                                                width="{{width}}"
+                                                alt="{{alt}}">
+                                          {{/if}}
+                                       {{/featuredImage}}
+                                    </a>
+                                 </div>
+                              {{/../nextPost}}
+                           </nav>
+                        {{/checkIfAny}}
+                     {{/if}}
+                  </footer>
+               {{/checkIfAny}}
+
+               {{#if @config.post.displayComments}}
+                  {{#checkIf @config.custom.commentOnClick '==' "click" }}
+                     <div class="comments">
+                        <button class="comments__button" id="js-comments">Load comments</button>
+                        <div
+                           class="comments__inner comments__inner--hidden"
+                           id="js-comments__inner">
+                           <h3 class="h4">
+                              {{ translate 'post.comments' }}</h3>
+                           {{> disqus}}
+                        </div>
+                     </div>
+                  {{else}}
+                     <div class="comments">
+                        <div class="comments__inner">
+                           <h3 class="h4">
+                              {{ translate 'post.comments' }}</h3>
+                           {{> disqus}}
+                        </div>
+                     </div>
+                  {{/checkIf}}
+               {{/if}}
+            </div>
+         </article>
+         {{#if @config.post.displayRelatedPosts}}
+            {{#if ../relatedPosts}}
+                <div class="page post__related {{#checkIf @config.custom.layoutMode '==' "flat" }} page--flat{{/checkIf}} ">
+                  <h3 class="h4">
+                     {{ translate 'post.relatedPosts' }}
+                  </h3>
+                  <div class="post__related__wrap">
+                     {{#each ../relatedPosts}}
+                        <figure>
+                           {{#featuredImage}}
+                              {{#if urlXs}}                              
+                                 <a href="{{../url}}">
+                                    <img 
+                                       src="{{urlXs}}"
+                                       {{ lazyload "lazy" }}
+                                       height="{{height}}"
+                                       width="{{width}}"
+                                       alt="{{alt}}">
+                                 </a>                               
+                              {{/if}}
+                           {{/featuredImage}}
+                           <figcaption>
+                              <h4 class="h6">
+                                 <a href="{{url}}" class="invert">{{title}}</a>
+                              </h4>
+                           </figcaption>
+                        </figure>
+                     {{/each}}
+                  </div>
+               </div>
+            {{/if}}
+         {{/if}}
+      </div>
+   </div>
+{{/post}}
+{{> bottom-news}}
+{{> footer}}

@@ -1,0 +1,22 @@
+{{> head}}
+{{> top}}
+<div class="main {{#checkIf @config.custom.layoutMode '==' "flat" }} main--flat{{/checkIf}}">
+    <div class="wrapper">
+        <article class="page {{#checkIf @config.custom.layoutMode '==' "flat" }} page--flat page--flat-no-hero{{/checkIf}}">
+            <div class="post__inner">
+                <header class="post__header">
+                    <h1 class="post__title">
+                        {{ translate 'error.404' }}
+                    </h1>
+                    <p>
+                        {{ translate 'error.message' }}
+                    </p>
+                    <p>
+                        <a href="{{@website.url}}" class="btn"> {{ translate 'error.button' }}</a>
+                    </p>
+                </header>
+            </div>
+        </article>
+    </div>
+</div>
+{{> footer}}

@@ -1,0 +1,87 @@
+{{> head}}
+{{> top}}
+
+<main class="main{{#checkIf @config.custom.layoutMode '==' "flat" }} main--flat{{/checkIf}}">
+   <div class="wrapper{{#checkIf @config.custom.listingWidth '==' "full" }} wrapper--full{{/checkIf}}">
+      <div class="page{{#checkIf @config.custom.layoutMode '==' "flat" }} page--flat page--flat-no-hero{{/checkIf}} tags">
+         <div class="post__inner page__header {{@config.custom.divider}} {{#checkIf @config.custom.dividerAlign '!=' "none" }}divider--center{{/checkIf}} ">
+            <h1 class="h6">
+            {{ translate 'tag.tagsPageTitle' }}
+            </h1>
+           
+         </div>         
+        {{#checkIf @config.custom.listingModeTagsPage '==' "grid" }} 
+            <div class="page__grid">
+         {{/checkIf}}     
+            {{#each tags}}
+               <div class="page__item">
+                  <div class="{{@config.custom.listingAlign}}                                 
+                              {{@config.custom.divider}} 
+                              {{@config.custom.dividerAlign}}">
+                     {{#checkIf @config.custom.listingModeTagsPage '==' "grid" }} 
+                     {{#checkIf @config.custom.listingFeaturedImage '!=' "none" }} 
+                        {{#featuredImage}}
+                           {{#if url}}
+                              <div class="page__item-image {{#checkIf @config.custom.listingFeaturedImage '==' "wide" }}page__item-image--wide{{/checkIf}}">
+                                 <a href="{{../url}}" class="page__item-image__wrap page__item-image__wrap--link">
+                                    <img
+                                       src="{{url}}"
+                                       {{#if @config.site.responsiveImages}}                           
+                                          {{responsiveImageAttributes 'tagImage' srcset.listing sizes.listing}}
+                                       {{/if}}
+                                       {{ lazyload "lazy" }}
+                                       height="{{height}}"
+                                       width="{{width}}"
+                                       alt="{{alt}}">
+                                 </a>   
+                              </div>
+                           {{/if}}
+                        {{/featuredImage}}
+                     {{/checkIf}}
+                     {{/checkIf}}     
+
+                     <h2 class="page__item-title">
+                        <a href="{{url}}" class="invert">{{name}}</a>
+                     </h2>
+                     <div class="post__meta">                           
+                        {{postsNumber}} {{ translate "tag.post" (math postsNumber '+' 0)}}                      
+                     </div>
+                     
+                     {{#checkIf @config.custom.listingModeTagsPage '!==' "grid" }} 
+                     {{#checkIf @config.custom.listingFeaturedImage '!=' "none" }} 
+                        {{#featuredImage}}
+                           {{#if url}}
+                              <div class="page__item-image {{#checkIf @config.custom.listingFeaturedImage '==' "wide" }}page__item-image--wide{{/checkIf}}">
+                                 <a href="{{../url}}" class="page__item-image__wrap page__item-image__wrap--link">                             
+                                    <img
+                                       src="{{url}}"
+                                       {{#if @config.site.responsiveImages}}                           
+                                          {{responsiveImageAttributes 'tagImage' srcset.listing sizes.listing}}
+                                       {{/if}}
+                                       {{ lazyload "lazy" }}
+                                       height="{{height}}"
+                                       width="{{width}}"
+                                       alt="{{alt}}">
+                                 </a>
+                              </div>
+                           {{/if}}
+                        {{/featuredImage}}
+                     {{/checkIf}}
+                     {{/checkIf}}
+                     
+                     {{#checkIfAll @config.custom.listingExcerpt description}}
+                        <p class="tags__description">
+                           {{description}}
+                        </p>
+                     {{/checkIfAll}}                
+                  </div>
+               </div>
+            {{/each}}
+         </div>
+      {{#checkIf @config.custom.listingModeTagsPage '==' "grid" }}  
+         </div>
+      {{/checkIf}} 
+   </div>
+</main>
+{{> bottom-news}}
+{{> footer}}
